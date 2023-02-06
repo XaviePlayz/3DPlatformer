@@ -19,10 +19,11 @@ public class PlayerMovement : MonoBehaviour
 
     //Jump
     [SerializeField] private float _jumpForce;
-    [SerializeField] KeyCode jump;
+    [SerializeField] KeyCode _jumpkey;
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         _rb = GetComponent<Rigidbody>();
     }
     private void Update()
@@ -30,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         RotateEyes();
         RotateBody();
 
-        if (Input.GetKeyDown(jump))
+        if (Input.GetKeyDown(_jumpkey))
         {
             TryJump();
         }
@@ -53,8 +54,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Move()
     {
-        float xDir = Input.GetAxis("Horizontal");
-        float zDir = Input.GetAxis("Vertical");
+        float xDir = Input.GetAxisRaw("Horizontal");
+        float zDir = Input.GetAxisRaw("Vertical");
 
         Vector3 dir = transform.right * xDir + transform.forward * zDir;
 
@@ -70,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
     private void Jump(float jumpForce)
     {
         _rb.velocity = new Vector3(_rb.velocity.x, 0, _rb.velocity.z);
-        _rb.AddForce(transform.up, ForceMode.Impulse);
+        _rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
     private bool IsGrounded()
     {
