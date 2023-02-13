@@ -5,6 +5,8 @@ using TMPro;
 
 public class PlayerMovementGrappling : MonoBehaviour
 {
+    [SerializeField] private Stats _stats;
+
     [Header("Movement")]
     private float moveSpeed;
     public float walkSpeed;

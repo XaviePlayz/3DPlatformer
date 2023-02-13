@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private Stats _stats;
+
     //Cam Movement
     [SerializeField] private Transform _eyes;
     [SerializeField] private float _sensitivity;
@@ -21,6 +23,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpForce;
     [SerializeField] KeyCode _jumpkey;
 
+    //Ability
+    [SerializeField] private KeyCode _abilityKey;
+    [SerializeField] private Ability _ability;
+
+    public Rigidbody Rb
+    {
+        get => _rb;
+        private set => _rb = value;
+    }
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -34,6 +46,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(_jumpkey))
         {
             TryJump();
+        }
+        if (Input.GetKeyDown(_abilityKey))
+        {
+            _ability.Use(this);
         }
     }
     private void FixedUpdate()
