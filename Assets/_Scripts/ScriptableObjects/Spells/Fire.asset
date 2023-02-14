@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e9fda58c984767448f457a08be35ab1, type: 3}
-  m_Name: LobBall
+  m_Name: Fire
   m_EditorClassIdentifier: 
-  _bullet: {fileID: 0}
+  _bullet: {fileID: 1584481546719536, guid: 94f55021adc743447972e33009b6eda2, type: 3}
