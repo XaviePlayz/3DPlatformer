@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     private GameObject inHandItem;
 
     [SerializeField]
-    private InputActionReference interactionInput, dropInput, useInput;
+    private InputActionReference interactionInput, dropInput, useInput, crouchInput, sprintInput;
 
     private RaycastHit hit;
 
@@ -59,6 +59,9 @@ public class Player : MonoBehaviour
 
     private void Drop(InputAction.CallbackContext obj)
     {
+        inHandItem.GetComponent<BoxCollider>().enabled = true;
+        inHandItem.GetComponent<Transform>().transform.rotation = Quaternion.Euler(0, 0, 0);
+
         if (inHandItem != null)
         {
             inHandItem.transform.SetParent(null);
@@ -81,34 +84,22 @@ public class Player : MonoBehaviour
                 pickUpSource.Play();
                 inHandItem = pickableItem.PickUp();
                 inHandItem.transform.SetParent(pickUpParent.transform, pickableItem.KeepWorldPosition);
+                inHandItem.GetComponent<BoxCollider>().enabled = false;
             }
-
-            //Debug.Log(hit.collider.name);
-            //Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-            //if (hit.collider.GetComponent<Food>() || hit.collider.GetComponent<Weapon>())
-            //{
-            //    Debug.Log("It's food!");
-            //    inHandItem = hit.collider.gameObject;
-            //    inHandItem.transform.position = Vector3.zero;
-            //    inHandItem.transform.rotation = Quaternion.identity;
-            //    inHandItem.transform.SetParent(pickUpParent.transform, false);
-            //    if(rb != null)
-            //    {
-            //        rb.isKinematic = true;
-            //    }
-            //    return;
-            //}
-            //if (hit.collider.GetComponent<Item>())
-            //{
-            //    Debug.Log("It's a useless item!");
-            //    inHandItem = hit.collider.gameObject;
-            //    inHandItem.transform.SetParent(pickUpParent.transform, true);
-            //    if (rb != null)
-            //    {
-            //        rb.isKinematic = true;
-            //    }
-            //    return;
-            //}
+        }
+    }
+    private void Open(InputAction.CallbackContext obj)
+    {
+        if (hit.collider != null && inHandItem == null)
+        {
+            IPickable pickableItem = hit.collider.GetComponent<IPickable>();
+            if (pickableItem != null)
+            {
+                pickUpSource.Play();
+                inHandItem = pickableItem.PickUp();
+                inHandItem.transform.SetParent(pickUpParent.transform, pickableItem.KeepWorldPosition);
+                inHandItem.GetComponent<BoxCollider>().enabled = false;
+            }
         }
     }
 

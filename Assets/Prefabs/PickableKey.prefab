@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 4352773033809272659}
   - component: {fileID: 4352773033809272663}
   - component: {fileID: 4352773033809272651}
-  - component: {fileID: 3506406159269346713}
   - component: {fileID: 3506406159269346712}
   m_Layer: 6
   m_Name: PickableKey
@@ -112,7 +111,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3506406159269346715}
-  m_LocalRotation: {x: -0, y: -0.103965856, z: -0, w: 0.99458086}
+  m_LocalRotation: {x: 0, y: -0.10396426, z: 0, w: 0.99458104}
   m_LocalPosition: {x: -13.545, y: 1.058, z: 3.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -179,21 +178,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: ec0431ee4e83cc649bc2d1bb66ac5c65, type: 3}
   volume: 0.4
---- !u!114 &3506406159269346713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3506406159269346715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53f293e8d300a9b498768b0cc9587277, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <OnUse>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &3506406159269346712
 MonoBehaviour:
   m_ObjectHideFlags: 0
