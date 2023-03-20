@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,13 +11,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform _eyes;
     [SerializeField] private float _sensitivity;
     [Range(-90f, 0f)]
-    [SerializeField] private float _camLimitMin;
+    [SerializeField] private float camLimitMin;
     [Range(0f, 90f)]
-    [SerializeField] private float _camLimitMax;
+    [SerializeField] private float camLimitMax;
     private float _camAngle = 0.0f;
 
     //Movement
-    [SerializeField] private float _speed;
+    [SerializeField] private float speed;
+    [SerializeField] private Slider staminaBar;
     private Rigidbody _rb;
 
     //Jump
@@ -39,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        staminaBar.value = 1;
         Cursor.lockState = CursorLockMode.Locked;
         _rb = GetComponent<Rigidbody>();
     }
@@ -59,6 +62,26 @@ public class PlayerMovement : MonoBehaviour
         {
             _ability.Use(this);
         }
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            StartCoroutine(Sprinting());
+            StopCoroutine(RestoreStamina());
+            if (staminaBar.value == 0)
+            {
+                speed = 2;
+            }
+            else
+            {
+                speed = 7;
+            }
+        }
+        else
+        {
+            StopCoroutine(Sprinting());
+            StartCoroutine(RestoreStamina());
+            speed = 4;
+        }
     }
     private void FixedUpdate()
     {
@@ -68,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float yMouse = Input.GetAxis("Mouse Y") * _sensitivity * Time.deltaTime;
         _camAngle -= yMouse;
-        _camAngle = Mathf.Clamp(_camAngle, _camLimitMin, _camLimitMax);
+        _camAngle = Mathf.Clamp(_camAngle, camLimitMin, camLimitMax);
         _eyes.localRotation = Quaternion.Euler(_camAngle, 0, 0);
     }
     private void RotateBody()
@@ -83,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 dir = transform.right * xDir + transform.forward * zDir;
 
-        _rb.velocity = new Vector3(0, _rb.velocity.y, 0) + dir.normalized * _speed;
+        _rb.velocity = new Vector3(0, _rb.velocity.y, 0) + dir.normalized * speed;
     }
     private void TryJump()
     {
@@ -114,5 +137,17 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit hit;
         return Physics.Raycast(transform.position, -transform.up, out hit, 1.1f);
+    }
+
+    private IEnumerator Sprinting()
+    {
+        staminaBar.value -= 0.004f;
+        yield return new WaitForSeconds(0.1f);
+    }
+
+    private IEnumerator RestoreStamina()
+    {
+        staminaBar.value += 0.002f;
+        yield return new WaitForSeconds(0.1f);
     }
 }

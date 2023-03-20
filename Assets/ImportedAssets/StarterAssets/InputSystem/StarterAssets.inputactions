@@ -33,24 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Crouch",
-                    "type": "PassThrough",
-                    "id": "09fb877c-0554-47b7-b090-1426e646468d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Sprint",
-                    "type": "PassThrough",
-                    "id": "980e881e-182c-404c-8cbf-3d09fdb48fef",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "bbe12e6a-f508-44d5-970c-9ebd0516c6b7",
@@ -78,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Spell Cast",
+                    "name": "Cast Spell",
                     "type": "PassThrough",
                     "id": "cceadc4f-c4a1-4530-ae18-1c9c9c7942ca",
                     "expectedControlType": "Axis",
@@ -211,22 +193,11 @@
                 },
                 {
                     "name": "",
-                    "id": "dc65b89f-9bd3-43fb-92af-d0d87ba5faa4",
-                    "path": "<Keyboard>/ctrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "29c21f64-d1d6-4778-99c9-8f06d8af6a55",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardMouse",
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -237,7 +208,7 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardMouse",
                     "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -248,7 +219,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardMouse",
                     "action": "Use",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -257,21 +228,10 @@
                     "name": "",
                     "id": "9572ea40-0925-4962-ac9f-403fc5313054",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Spell Cast",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "902f33e3-76ce-4261-8b3a-1b38c2f22c5f",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "Crouch",
+                    "action": "Cast Spell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
