@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Stats _stats;
 
-    //Cam Movement
+    [Header("Cam Movement")]
     [SerializeField] private Transform _eyes;
     [SerializeField] private float _sensitivity;
     [Range(-90f, 0f)]
@@ -16,22 +16,38 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float camLimitMax;
     private float _camAngle = 0.0f;
 
-    //Movement
+    [Header("Movement")]
     [SerializeField] private float speed;
     [SerializeField] private Slider staminaBar;
     private Rigidbody _rb;
 
-    //Jump
+    [Header("Jump")]
     [SerializeField] private float _jumpForce;
     [SerializeField] private KeyCode _jumpkey;
 
-    //Interact
+    [Header("Interact")]
     [SerializeField] private KeyCode _interactkey;
     [SerializeField] float _interactRange;
 
-    //Ability
+    [Header("Abilities")]
     [SerializeField] private KeyCode _abilityKey;
     [SerializeField] private Ability _ability;
+    [SerializeField] private Ability _fireAbility;
+    [SerializeField] private Ability _iceAbility;
+    [SerializeField] private Ability _acidAbility;
+
+    [Header("Canvas")]
+    [SerializeField] private Image fireFrame;
+    [SerializeField] private Image iceFrame;
+    [SerializeField] private Image acidFrame;
+
+    [SerializeField] private Sprite unactiveFrame;
+    [SerializeField] private Sprite activefireFrame;
+    [SerializeField] private Sprite activeiceFrame;
+    [SerializeField] private Sprite activeacidFrame;
+
+
+
 
     public Rigidbody Rb
     {
@@ -61,6 +77,28 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(_abilityKey))
         {
             _ability.Use(this);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _ability = _fireAbility;
+            fireFrame.sprite = activefireFrame;
+            iceFrame.sprite = unactiveFrame;
+            acidFrame.sprite = unactiveFrame;
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _ability = _iceAbility;
+            fireFrame.sprite = unactiveFrame;
+            iceFrame.sprite = activeiceFrame;
+            acidFrame.sprite = unactiveFrame;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            _ability = _acidAbility;
+            fireFrame.sprite = unactiveFrame;
+            iceFrame.sprite = unactiveFrame;
+            acidFrame.sprite = activeacidFrame;
         }
 
         if (Input.GetKey(KeyCode.LeftControl))

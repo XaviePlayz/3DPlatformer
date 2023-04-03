@@ -12,10 +12,16 @@ public class Projectile : MonoBehaviour
     {
         transform.position += transform.forward * projectileSpeed * Time.deltaTime;
     }
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
         Debug.Log(other);
         Destroy(gameObject);
         Instantiate(explosionVFX, transform.position, transform.rotation);
+    }
+
+    IEnumerator DestroyProjectile()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
     }
 }

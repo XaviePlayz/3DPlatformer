@@ -7,7 +7,7 @@ public class ShootingAbility : Ability
 {
     public static ShootingAbility Instance;
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private AudioClip magicWandBlastShot;
+    [SerializeField] private AudioClip projectileVFX;
 
     public override void Use(PlayerMovement player)
     {
@@ -15,6 +15,6 @@ public class ShootingAbility : Ability
             projectilePrefab, 
             Player.Instance._bulletSpawn.transform.position, 
             Player.Instance._bulletSpawn.transform.rotation);
-        AudioPool.Instance.PlayAudio(magicWandBlastShot);
+        AudioPool.Instance.PlayAudio(projectileVFX);
     }
 }

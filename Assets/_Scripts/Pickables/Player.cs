@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private InputActionReference interactionInput, dropInput, useInput;
 
-    private RaycastHit hit;
+    [SerializeField] public RaycastHit hit;
     [SerializeField] public GameObject _bulletSpawn;
 
     [SerializeField] private AudioSource pickUpSource;
