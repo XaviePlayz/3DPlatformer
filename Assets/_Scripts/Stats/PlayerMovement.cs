@@ -65,22 +65,32 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            StartCoroutine(Sprinting());
-            StopCoroutine(RestoreStamina());
-            if (staminaBar.value == 0)
+            if (Input.GetKey(KeyCode.W))
             {
-                speed = 2;
+                StartCoroutine(Sprinting());
+                StopCoroutine(RestoreStaminaWhileRunning());
+                StopCoroutine(RestoreStamina());
+                if (staminaBar.value == 0)
+                {
+                    speed = 2;
+                }
+                else
+                {
+                    speed = 7;
+                }
             }
             else
             {
-                speed = 7;
+                StopCoroutine(Sprinting());
+                StartCoroutine(RestoreStaminaWhileRunning());
+                speed = 4;
             }
         }
-        else
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
+            speed = 4;
             StopCoroutine(Sprinting());
             StartCoroutine(RestoreStamina());
-            speed = 4;
         }
     }
     private void FixedUpdate()
@@ -148,6 +158,12 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator RestoreStamina()
     {
         staminaBar.value += 0.002f;
+        yield return new WaitForSeconds(0.1f);
+    }
+
+    private IEnumerator RestoreStaminaWhileRunning()
+    {
+        staminaBar.value += 0.0002f;
         yield return new WaitForSeconds(0.1f);
     }
 }

@@ -5,10 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Ability/ShootAbility")]
 public class ShootingAbility : Ability
 {
-    [SerializeField] private GameObject _bullet;
+    public static ShootingAbility Instance;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private AudioClip magicWandBlastShot;
+
     public override void Use(PlayerMovement player)
     {
-        Instantiate(_bullet, player.transform.position, player.transform.rotation);
-        
+        var fireball = Instantiate(
+            projectilePrefab, 
+            Player.Instance._bulletSpawn.transform.position, 
+            Player.Instance._bulletSpawn.transform.rotation);
+        AudioPool.Instance.PlayAudio(magicWandBlastShot);
     }
 }

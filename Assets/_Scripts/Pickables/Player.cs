@@ -28,12 +28,12 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject inHandItem;
 
-    [SerializeField] private InputActionReference interactionInput, dropInput, useInput, shootInput;
+    [SerializeField] private InputActionReference interactionInput, dropInput, useInput;
 
     private RaycastHit hit;
+    [SerializeField] public GameObject _bulletSpawn;
 
     [SerializeField] private AudioSource pickUpSource;
-    [SerializeField] private AudioClip magicWandBlastShot;
 
     [Header("Zoom Parameters")]
     [SerializeField] private float timeToZoom = 0.3f;
@@ -53,7 +53,6 @@ public class Player : MonoBehaviour
         interactionInput.action.performed += PickUp;
         dropInput.action.performed += Drop;
         useInput.action.performed += Use;
-        shootInput.action.performed += Shoot;
     }
 
     private void Use(InputAction.CallbackContext obj)
@@ -113,11 +112,6 @@ public class Player : MonoBehaviour
                 inHandItem.GetComponent<BoxCollider>().enabled = false;
             }
         }
-    }
-
-    private void Shoot(InputAction.CallbackContext obj)
-    {
-        AudioPool.Instance.PlayAudio(magicWandBlastShot);
     }
 
     private void Update()

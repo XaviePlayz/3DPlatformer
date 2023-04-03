@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9fda58c984767448f457a08be35ab1, type: 3}
   m_Name: Fire
   m_EditorClassIdentifier: 
-  _bullet: {fileID: 1584481546719536, guid: 94f55021adc743447972e33009b6eda2, type: 3}
+  projectilePrefab: {fileID: 5821437908570742553, guid: 721b253bbb4e1de46846cf46a8432110,
+    type: 3}
+  magicWandBlastShot: {fileID: 8300000, guid: f6fb9f21bad8b284c8ce7587a3043c01, type: 3}
