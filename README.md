@@ -5,6 +5,7 @@ Eliminate All Jesters.
 
 Game Mechanics:
 Move - WASD.
+
 Sprint - Ctrl.
 Look - Mouse.
 Shoot - Left Mouse Button.
