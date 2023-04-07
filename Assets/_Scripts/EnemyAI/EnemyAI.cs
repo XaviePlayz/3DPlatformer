@@ -16,7 +16,9 @@ public class EnemyAI : MonoBehaviour
 
     public float hitPoints;
     public float maxHitPoints = 5;
+    public bool died;
     public HealthBarBehaviour Healthbar;
+    public Goal goal;
     public Animator anim;
 
     private void Start()
@@ -83,8 +85,9 @@ public class EnemyAI : MonoBehaviour
         hitPoints -= damage;
         Healthbar.SetEnemyHealth(hitPoints, maxHitPoints);
 
-        if (hitPoints <= 0)
+        if (hitPoints <= 0 && !died)
         {
+            died = true;
             anim.SetTrigger("Death");
             StartCoroutine(Death());
         }
@@ -94,6 +97,8 @@ public class EnemyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);
+        goal.jestersKilled++;
+        goal.counter.text = goal.jestersKilled.ToString() + "/" + goal.totalJesterCount;
         StopCoroutine(Death());
     }
 }
