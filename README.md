@@ -1,9 +1,12 @@
 # 3DPlatformer
 
-Game Goal:
-Eliminate All Jesters.
+---------------------
+Game Goal: Eliminate All Jesters.
+
+---------------------
 
 Game Mechanics:
+---------------------
 
 Move - WASD.
 
@@ -23,9 +26,10 @@ Drop - Q.
 
 Rotate Spells - 1, 2 & 3.
 
-
+---------------------
 
 What I wasn't able to finish:
+---------------------
 
 Enemy hits Player, (Animation does work).
 
