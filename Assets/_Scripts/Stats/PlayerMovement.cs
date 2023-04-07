@@ -36,6 +36,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Ability _iceAbility;
     [SerializeField] private Ability _acidAbility;
 
+    [SerializeField] public bool usingIce = false;
+    [SerializeField] public bool usingAcid = false;
+
     [Header("Canvas")]
     [SerializeField] private Image fireFrame;
     [SerializeField] private Image iceFrame;
@@ -45,9 +48,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Sprite activefireFrame;
     [SerializeField] private Sprite activeiceFrame;
     [SerializeField] private Sprite activeacidFrame;
-
-
-
 
     public Rigidbody Rb
     {
@@ -84,7 +84,8 @@ public class PlayerMovement : MonoBehaviour
             fireFrame.sprite = activefireFrame;
             iceFrame.sprite = unactiveFrame;
             acidFrame.sprite = unactiveFrame;
-
+            usingIce = false;
+            usingAcid = false;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -92,6 +93,8 @@ public class PlayerMovement : MonoBehaviour
             fireFrame.sprite = unactiveFrame;
             iceFrame.sprite = activeiceFrame;
             acidFrame.sprite = unactiveFrame;
+            usingIce = true;
+            usingAcid = false;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
@@ -99,6 +102,8 @@ public class PlayerMovement : MonoBehaviour
             fireFrame.sprite = unactiveFrame;
             iceFrame.sprite = unactiveFrame;
             acidFrame.sprite = activeacidFrame;
+            usingIce = false;
+            usingAcid = true;
         }
 
         if (Input.GetKey(KeyCode.LeftControl))
@@ -123,6 +128,12 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(RestoreStaminaWhileRunning());
                 speed = 4;
             }
+        }
+        else
+        {
+            StopCoroutine(Sprinting());
+            StartCoroutine(RestoreStaminaWhileRunning());
+            speed = 4;
         }
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
@@ -201,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator RestoreStaminaWhileRunning()
     {
-        staminaBar.value += 0.0002f;
+        staminaBar.value += 0.0004f;
         yield return new WaitForSeconds(0.1f);
     }
 }

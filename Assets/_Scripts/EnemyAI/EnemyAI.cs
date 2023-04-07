@@ -13,8 +13,15 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] float stoppingDistance = 1f;
 
+    public float hitPoints;
+    public float maxHitPoints = 5;
+    public HealthBarBehaviour Healthbar;
+
     private void Start()
     {
+        hitPoints = maxHitPoints;
+        Healthbar.SetEnemyHealth(hitPoints, maxHitPoints);
+
         startPos = transform.position;
         startRotation = transform.rotation;
     }
@@ -46,5 +53,15 @@ public class EnemyAI : MonoBehaviour
         }
 
         agent.SetDestination(destination);
+    }
+    public void TakeHit(float damage)
+    {
+        hitPoints -= damage;
+        Healthbar.SetEnemyHealth(hitPoints, maxHitPoints);
+
+        if (hitPoints <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

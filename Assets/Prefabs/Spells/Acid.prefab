@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 273353210041614864}
   m_Layer: 0
   m_Name: Acid
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,8 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8d34e45f0855648a4d8a72dfe70d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 0}
   projectileSpeed: 15
-  explosionVFX: {fileID: 100006, guid: f75b9948cb8c2274ea2f8cd63510d8dc, type: 3}
+  explosionVFX: {fileID: 2909742839285460006, guid: 13f42035c239ba042acdc7b048f19d19,
+    type: 3}
+  impact: {fileID: 0}
+  acid: {fileID: 0}
 --- !u!54 &273353210041614871
 Rigidbody:
   m_ObjectHideFlags: 0

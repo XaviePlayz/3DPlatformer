@@ -41,8 +41,6 @@ public class Player : MonoBehaviour
     private float defaultFOV;
     private Coroutine zoomRoutine;
 
-    private bool alreadyCrouching;
-
     void Awake()
     {
         defaultFOV = playerCam.fieldOfView;
@@ -55,6 +53,50 @@ public class Player : MonoBehaviour
         useInput.action.performed += Use;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            if (zoomRoutine != null)
+            {
+                StopCoroutine(zoomRoutine);
+                zoomRoutine = null;
+            }
+            Crosshair.Instance.ZoomIn();
+            zoomRoutine = StartCoroutine(ToggleZoom(true));
+        }
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            if (zoomRoutine != null)
+            {
+                StopCoroutine(zoomRoutine);
+                zoomRoutine = null;
+            }
+            Crosshair.Instance.ZoomOut();
+            zoomRoutine = StartCoroutine(ToggleZoom(false));
+        }
+
+        Debug.DrawRay(playerCameraTransform.position, playerCameraTransform.forward * hitRange, Color.red);
+        if (hit.collider != null)
+        {
+            pickUpUI.SetActive(false);
+        }
+
+        if (inHandItem != null)
+        {
+            return;
+        }
+
+        if (Physics.Raycast(
+            playerCameraTransform.position,
+            playerCameraTransform.forward,
+            out hit,
+            hitRange,
+            pickableLayerMask))
+        {
+            pickUpUI.SetActive(true);
+        }
+    }
     private void Use(InputAction.CallbackContext obj)
     {
         if (inHandItem != null)
@@ -66,7 +108,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-
     private void Drop(InputAction.CallbackContext obj)
     {
         inHandItem.GetComponent<BoxCollider>().enabled = true;
@@ -84,7 +125,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-
     private void PickUp(InputAction.CallbackContext obj)
     {
         if(hit.collider != null && inHandItem == null)
@@ -111,68 +151,6 @@ public class Player : MonoBehaviour
                 inHandItem.transform.SetParent(pickUpParent.transform, pickableItem.KeepWorldPosition);
                 inHandItem.GetComponent<BoxCollider>().enabled = false;
             }
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            if (zoomRoutine != null)
-            {
-                StopCoroutine(zoomRoutine);
-                zoomRoutine = null;
-            }
-            Crosshair.Instance.ZoomIn();
-            zoomRoutine = StartCoroutine(ToggleZoom(true));
-        }
-        if (Input.GetKeyUp(KeyCode.Mouse1))
-        {
-            if (zoomRoutine != null)
-            {
-                StopCoroutine(zoomRoutine);
-                zoomRoutine = null;
-            }
-            Crosshair.Instance.ZoomOut();
-            zoomRoutine = StartCoroutine(ToggleZoom(false));
-        }
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            if (!alreadyCrouching)
-            {
-                //playerCam.transform.position = new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z);
-            }
-            alreadyCrouching = true;
-        }
-        else
-        {
-            //playerCam.transform.position = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
-            alreadyCrouching = false;
-        }
-
-
-        Debug.DrawRay(playerCameraTransform.position, playerCameraTransform.forward * hitRange, Color.red);
-        if (hit.collider != null)
-        {
-            hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
-            pickUpUI.SetActive(false);
-        }
-
-        if (inHandItem != null)
-        {
-            return;
-        }
-
-        if (Physics.Raycast(
-            playerCameraTransform.position, 
-            playerCameraTransform.forward, 
-            out hit, 
-            hitRange, 
-            pickableLayerMask))
-        {
-            hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
-            pickUpUI.SetActive(true);
         }
     }
 

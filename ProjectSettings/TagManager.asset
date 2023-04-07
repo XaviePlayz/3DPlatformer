@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - projectileDirection
+  - Floor
+  - Spell
+  - Enemy
   layers:
   - Default
   - TransparentFX

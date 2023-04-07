@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 1083762885913765730, guid: e437557355f6b7245bd8778417212deb,
     type: 3}
-  projectileVFX: {fileID: 8300000, guid: f6fb9f21bad8b284c8ce7587a3043c01, type: 3}
+  projectileVFX: {fileID: 8300000, guid: dc1a04de21b9e2b47850a209bcb53aee, type: 3}

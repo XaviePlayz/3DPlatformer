@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1355263494633661821}
   m_Layer: 0
   m_Name: Fire
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,8 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8d34e45f0855648a4d8a72dfe70d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 0}
   projectileSpeed: 15
-  explosionVFX: {fileID: 100006, guid: f75b9948cb8c2274ea2f8cd63510d8dc, type: 3}
+  explosionVFX: {fileID: 0}
+  impact: {fileID: 0}
+  acid: {fileID: 0}
 --- !u!54 &1355263494633661820
 Rigidbody:
   m_ObjectHideFlags: 0
