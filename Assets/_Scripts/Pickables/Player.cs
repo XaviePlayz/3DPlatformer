@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] public RaycastHit hit;
     [SerializeField] public GameObject _bulletSpawn;
+    [SerializeField] public int Health;
 
     [SerializeField] private AudioSource pickUpSource;
 

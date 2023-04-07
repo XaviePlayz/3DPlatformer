@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,9 +17,11 @@ public class EnemyAI : MonoBehaviour
     public float hitPoints;
     public float maxHitPoints = 5;
     public HealthBarBehaviour Healthbar;
+    public Animator anim;
 
     private void Start()
     {
+        anim.GetComponent<Animator>();
         hitPoints = maxHitPoints;
         Healthbar.SetEnemyHealth(hitPoints, maxHitPoints);
 
@@ -35,6 +38,7 @@ public class EnemyAI : MonoBehaviour
 
         if (agent.remainingDistance <= .1f)
             transform.rotation = Quaternion.Slerp(transform.rotation, startRotation, Time.deltaTime * smooothRotationTime);
+        
     }
 
     private void Destination()
@@ -43,13 +47,33 @@ public class EnemyAI : MonoBehaviour
 
         if (fieldOfView.IsTarget)
         {
-            destination = target.position;
+            anim.SetBool("Running", true);
+
+            if (hitPoints > 0)
+            {
+                destination = target.position;
+            }
             agent.stoppingDistance = stoppingDistance;
+
+            if (agent.remainingDistance <= stoppingDistance)
+            {
+                anim.SetBool("Attack", true);
+            }
+            else
+            {
+                anim.SetBool("Attack", false);
+            }
         }
         else
         {
             destination = startPos;
             agent.stoppingDistance = 0;
+        }
+
+        if (transform.position == startPos)
+        {
+            anim.SetBool("Running", false);
+            anim.SetTrigger("Idle");
         }
 
         agent.SetDestination(destination);
@@ -61,7 +85,15 @@ public class EnemyAI : MonoBehaviour
 
         if (hitPoints <= 0)
         {
-            Destroy(gameObject);
+            anim.SetTrigger("Death");
+            StartCoroutine(Death());
         }
+    }
+
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
+        StopCoroutine(Death());
     }
 }
