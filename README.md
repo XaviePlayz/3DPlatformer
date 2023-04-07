@@ -8,37 +8,37 @@ Game Goal: Eliminate All Jesters.
 Game Mechanics:
 ---------------------
 
-Move - WASD.
+* Move - WASD.
 
-Sprint - Ctrl.
+* Sprint - Ctrl.
 
-Look - Mouse.
+* Look - Mouse.
 
-Shoot - Left Mouse Button.
+* Shoot - Left Mouse Button.
 
-Zoom - Right Mouse Button.
+* Zoom - Right Mouse Button.
 
-Pick-up - F.
+* Pick-up - F.
 
-Use - E.
+* Use - E.
 
-Drop - Q.
+* Drop - Q.
 
-Rotate Spells - 1, 2 & 3.
+* Rotate Spells - 1, 2 & 3.
 
 ---------------------
 
 What I wasn't able to finish:
 ---------------------
 
-Enemy hits Player, (Animation does work).
+* Enemy hits Player, (Animation does work).
 
-Enemy AI Optimizations / Better AI Navigation.
+* Enemy AI Optimizations / Better AI Navigation.
 
-Differences between the 3 spells, they still do an equal amount of damage right now.
+* Differences between the 3 spells, they still do an equal amount of damage right now.
 
-Different Enemies, there are currently only Jesters.
+* Different Enemies, there are currently only Jesters.
 
-Randomized Enemy locations.
+* Randomized Enemy locations.
 
-More and improved Level Design (World).
+* More and improved Level Design (World).
